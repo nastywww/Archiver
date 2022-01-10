@@ -4,6 +4,8 @@ namespace ArchSisa.Core.Interfaces
 {
     public interface ICompresser
     {
-        Task CompressFile(string fileInput, string fileOutput);
+        byte[] Compress(byte[] dataToShare);
+        byte[][] CompressFile(byte[] dataToCompress);
+
     }
 }

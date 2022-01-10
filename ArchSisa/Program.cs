@@ -16,6 +16,8 @@ namespace ArchSisa
             serviceCollection.AddSingleton<IArgumentParser, ArgumentParser>();
             serviceCollection.AddSingleton<ICompresser, Compresser>();
             serviceCollection.AddSingleton<IDecompresser, Decompresser>();
+            serviceCollection.AddSingleton<IFileReader, FileReader>();
+            serviceCollection.AddSingleton<IFileWriter, FileWriter>();
 
             return serviceCollection.BuildServiceProvider();
         }
