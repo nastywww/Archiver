@@ -27,21 +27,21 @@ namespace ArchSisa.Core
             _fileWriter = fileWriter;
         }
 
-        public async Task Archive(string[] args)
+        public void Archive(string[] args)
         {
             var arg = _argumentParser.ParsArguments(args);
 
             switch (arg.Command)
             {
                 case Commands.Zip:
-                    var arrayBytes = _fileReader.ReadFileForZip(arg.FileInput);
-                    var bytesToWrite = _compresser.CompressFile(arrayBytes);
-                    _fileWriter.WriteFile(arg.FileOutput, bytesToWrite, arg.Command);
+                    var arrayBytesToZip = _fileReader.ReadFileForZip(arg.FileInput);
+                    var compressedBytes = _compresser.CompressFile(arrayBytesToZip);
+                    _fileWriter.WriteFile(arg.FileOutput, compressedBytes, arg.Command);
                     break;
                 case Commands.Unzip:
-
-                    await _decompresser.DecompressFile(arg.FileInput, arg.FileOutput);
-
+                    var arrayBytesToUnzip = _fileReader.ReadFileForUnzip(arg.FileInput);
+                    var decompressedBytes = _decompresser.DecompressFile(arrayBytesToUnzip);
+                    _fileWriter.WriteFile(arg.FileOutput, decompressedBytes, arg.Command);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

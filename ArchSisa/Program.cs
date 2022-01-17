@@ -22,13 +22,13 @@ namespace ArchSisa
             return serviceCollection.BuildServiceProvider();
         }
 
-        private static async Task Main(string[] args)
+        private static void Main(string[] args)
         {
             var serviceProvider = GetServiceProvider();
 
             var archiver = serviceProvider.GetRequiredService<IArchiver>();
 
-            await archiver.Archive(args);
+            archiver.Archive(args);
         }
 
     }

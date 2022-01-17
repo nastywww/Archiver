@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using ArchSisa.Core.Enum;
 using ArchSisa.Core.Interfaces;
 
 namespace ArchSisa.Core
@@ -17,7 +16,7 @@ namespace ArchSisa.Core
             using var reader = new BinaryReader(File.Open(fileInput, FileMode.Open));
             var array = new List<byte[]>();
 
-            while (reader.PeekChar() != -1)
+            while (reader.BaseStream.Position != reader.BaseStream.Length)
             {
                 var length = reader.ReadInt32();
                 var buffer = new byte[length];
